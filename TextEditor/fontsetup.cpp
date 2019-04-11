@@ -17,10 +17,10 @@ FontSetup::~FontSetup()
   //обычный деструктор
 }
 
-void FontSetup::setFontStyle(const QString inputfontStyle)
+void FontSetup::setFontStyle(const QFont inputfontStyle)
 {
   this->fontStyle = inputfontStyle;
-  setup->setFontFamily(this->fontStyle);
+  setup->setFont(this->fontStyle);
 }
 
 void FontSetup::setFontColor(const QColor inputfontColor)

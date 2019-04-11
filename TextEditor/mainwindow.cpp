@@ -73,7 +73,7 @@ void MainWindow::saveFileSlot()
 
 void MainWindow::changeFontSizeSlot()
 {
-    pFontSetup->setFontSize(QInputDialog::getInt(this,"Размер шрифта", "Укажите размер", 14, 1, 72));
+    pFontSetup->setFontSize(QInputDialog::getInt(this, "Размер шрифта", "Укажите размер", 14, 1, 72));
 }
 
 void MainWindow::changeFontColorSlot()
@@ -83,7 +83,7 @@ void MainWindow::changeFontColorSlot()
 
 void MainWindow::changeFontStyleSlot()
 {
-
+    pFontSetup->setFontStyle(QFontDialog::getFont(nullptr,this));
 }
 
 void MainWindow::changeBackgroundColorSlot()

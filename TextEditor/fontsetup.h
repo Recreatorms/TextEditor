@@ -4,13 +4,14 @@
 #include <QTextEdit>
 #include <QColor>
 #include <QPalette>
-
+#include <QFontDialog>
+#include <QFont>
 class FontSetup
 {
 public:
     FontSetup(QTextEdit* text);
     ~FontSetup();
-    void setFontStyle(const QString fontStyle);
+    void setFontStyle(const QFont fontStyle);
     void setFontColor(const QColor fontColor);
     void setFontSize(int size);
     void setBackgroundColor(const QColor backgroundColor);
@@ -19,7 +20,7 @@ public:
     QColor fontColor;
     QColor backgroundColor;
     QColor backgroundTextColor;
-    QString fontStyle;
+    QFont fontStyle;
     int fontSize;
 private:
     QTextEdit *setup;
