@@ -57,7 +57,7 @@
      <x>0</x>
      <y>0</y>
      <width>888</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="Font">
@@ -66,9 +66,12 @@
     </property>
     <addaction name="changeFontSize"/>
     <addaction name="changeFontStyle"/>
+    <addaction name="separator"/>
     <addaction name="changeFontColor"/>
     <addaction name="changeBackgroundColor"/>
     <addaction name="changeBackgroundTextColor"/>
+    <addaction name="separator"/>
+    <addaction name="changeHighlight"/>
    </widget>
    <widget class="QMenu" name="File">
     <property name="title">
@@ -80,8 +83,14 @@
     <addaction name="saveFile"/>
     <addaction name="saveNowFile"/>
    </widget>
+   <widget class="QMenu" name="Compiler">
+    <property name="title">
+     <string>Компилятор</string>
+    </property>
+   </widget>
    <addaction name="File"/>
    <addaction name="Font"/>
+   <addaction name="Compiler"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="movable">
@@ -123,6 +132,9 @@
    <property name="text">
     <string>Сохранить как...</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
   </action>
   <action name="changeFontSize">
    <property name="text">
@@ -155,6 +167,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="changeHighlight">
+   <property name="text">
+    <string>Изменить цвет выделения текста</string>
    </property>
   </action>
  </widget>

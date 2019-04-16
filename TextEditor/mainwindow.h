@@ -23,11 +23,14 @@ private slots:
   void openFileSlot();
   void saveFileSlot();
   void saveNowFileSlot();
+
   void changeFontStyleSlot();
   void changeFontColorSlot();
   void changeFontSizeSlot();
   void changeBackgroundColorSlot();
   void changeBackgroundTextColorSlot();
+
+  void changeHighlightSlot();
 
 private:
   Ui::MainWindow *ui;

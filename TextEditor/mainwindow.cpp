@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->changeFontColor, &QAction::triggered, this, &MainWindow::changeFontColorSlot);
   connect(ui->changeBackgroundColor, &QAction::triggered, this, &MainWindow::changeBackgroundColorSlot);
   connect(ui->changeBackgroundTextColor, &QAction::triggered, this, &MainWindow::changeBackgroundTextColorSlot);
+
+  connect(ui->changeHighlight, &QAction::triggered, this, &MainWindow::changeHighlightSlot);
 }
 
 MainWindow::~MainWindow()
@@ -94,4 +96,10 @@ void MainWindow::changeBackgroundColorSlot()
 void MainWindow::changeBackgroundTextColorSlot()
 {
     pFontSetup->setBackgroundTextColor(QColorDialog::getColor(pFontSetup->backgroundTextColor,this));
+}
+
+
+void MainWindow::changeHighlightSlot()
+{
+
 }
