@@ -16,12 +16,14 @@ public:
     void setFontSize(int size);
     void setBackgroundColor(const QColor backgroundColor);
     void setBackgroundTextColor(const QColor);
+    void setHighlightColor(const QColor highlightColor);
 
     QColor fontColor;
     QColor backgroundColor;
     QColor backgroundTextColor;
     QFont fontStyle;
     int fontSize;
+    QColor highlightColor;
 private:
     QTextEdit *setup;
 };

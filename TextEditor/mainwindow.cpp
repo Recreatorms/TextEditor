@@ -101,5 +101,5 @@ void MainWindow::changeBackgroundTextColorSlot()
 
 void MainWindow::changeHighlightSlot()
 {
-
+  pFontSetup->setHighlightColor(QColorDialog::getColor(pFontSetup->highlightColor,this));
 }
