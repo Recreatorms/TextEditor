@@ -3,9 +3,10 @@
 const int defaultSize = 14;
 const QColor defaultColor = Qt::black;
 const QColor defaultBackgroundColor = Qt::white;
+const QColor defaultHighlightColor = QColor::fromRgb(0, 120, 215, 255);
 
-QColor currentColor = defaultColor;
-
+static QColor currentFontColor = defaultColor;
+static QColor currentHighlightColor = defaultHighlightColor;
 FontSetup::FontSetup(QTextEdit*text)
 {
     setup = text;
@@ -29,7 +30,8 @@ void FontSetup::setFontColor(const QColor inputfontColor)
 {
   this->fontColor = inputfontColor;
   setup->setTextColor(this->fontColor);
-  currentColor = fontColor;
+  currentFontColor = fontColor;
+  setHighlightColor(currentHighlightColor);
 }
 
 void FontSetup::setFontSize(int inputfontSize)
@@ -55,6 +57,7 @@ void FontSetup::setHighlightColor(const QColor highlightColor)
 {
   QPalette p = setup->palette();
   p.setColor(QPalette::Highlight, QColor(highlightColor));
-  p.setColor(QPalette::HighlightedText, QColor(currentColor));
+  p.setColor(QPalette::HighlightedText, QColor(currentFontColor));
   setup->setPalette(p);
+  currentHighlightColor = highlightColor;
 }

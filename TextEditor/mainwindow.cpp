@@ -75,7 +75,7 @@ void MainWindow::saveFileSlot()
 
 void MainWindow::changeFontSizeSlot()
 {
-    pFontSetup->setFontSize(QInputDialog::getInt(this, "Размер шрифта", "Укажите размер", 14, 1, 72));
+    pFontSetup->setFontSize(QInputDialog::getInt(this, "Размер шрифта", "Укажите размер", 14, 1, 100));
 }
 
 void MainWindow::changeFontColorSlot()
