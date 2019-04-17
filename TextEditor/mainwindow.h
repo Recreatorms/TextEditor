@@ -4,8 +4,9 @@
 #include <QMainWindow>
 #include "filemanager.h"
 #include "fontsetup.h"
+#include "compiler.h"
 
-static QString currentPath;
+
 namespace Ui {
   class MainWindow;
 }
@@ -32,10 +33,13 @@ private slots:
 
   void changeHighlightSlot();
 
+  void runSlot();
+
 private:
   Ui::MainWindow *ui;
   FileManager* pFileManager;
   FontSetup* pFontSetup;
+  Compiler* pCompiler;
 };
 
 #endif // MAINWINDOW_H

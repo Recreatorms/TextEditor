@@ -6,6 +6,12 @@
 #include <QPalette>
 #include <QFontDialog>
 #include <QFont>
+
+const int defaultFontSize = 20;
+const QColor defaultColor = Qt::black;
+const QColor defaultBackgroundColor = Qt::white;
+const QColor defaultHighlightColor = QColor::fromRgb(0, 120, 215, 255);
+
 class FontSetup
 {
 public:
@@ -24,6 +30,7 @@ public:
     QFont fontStyle;
     int fontSize;
     QColor highlightColor;
+
 private:
     QTextEdit *setup;
 };

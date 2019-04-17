@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "fontsetup.h"
 
 #include <qstring.h>
 #include <QContextMenuEvent>
@@ -15,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->setupUi(this);
   pFileManager = new FileManager();
   pFontSetup = new FontSetup(ui->textEdit);
+  pCompiler = new Compiler();
 
   connect(ui->createFile, &QAction::triggered, this, &MainWindow::createFileSlot);
   connect(ui->openFile, &QAction::triggered, this, &MainWindow::openFileSlot);
@@ -28,6 +28,11 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->changeBackgroundTextColor, &QAction::triggered, this, &MainWindow::changeBackgroundTextColorSlot);
 
   connect(ui->changeHighlight, &QAction::triggered, this, &MainWindow::changeHighlightSlot);
+
+  connect(ui->run,&QAction::triggered, this, &MainWindow::runSlot);
+
+  pFontSetup->setFontSize(defaultFontSize);
+  pFontSetup->setHighlightColor(defaultHighlightColor);
 }
 
 MainWindow::~MainWindow()
@@ -39,8 +44,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::openFileSlot()
 {
-    QString path = QFileDialog::getOpenFileName(this, tr("Открыть файл"), "", "*.txt *.docx *.cpp *.c *.h");
-    currentPath = path;
+    QString path = QFileDialog::getOpenFileName(this, "Открыть файл", pFileManager->fileName, "*.txt *.cpp *.c *.h");
+    pFileManager->currentPath = path;
     if(path != "")
     {
        QString text = pFileManager->openFile(path);
@@ -50,22 +55,22 @@ void MainWindow::openFileSlot()
 
 void MainWindow::createFileSlot()
 {
-  QString path = QFileDialog::getSaveFileName(this, tr("Создать файл"), "sampleText");
-  currentPath = path;
+  QString path = QFileDialog::getSaveFileName(this, "Создать файл", "sampleText");
+  pFileManager->currentPath = path;
   pFileManager->createFile(path);
 }
 
 void MainWindow::saveNowFileSlot() {
-  if(currentPath != "")
+  if(pFileManager->currentPath != "")
   {
       QString text = ui->textEdit->toPlainText();
-      pFileManager->saveFile(currentPath,text);
+      pFileManager->saveFile(pFileManager->currentPath,text);
   }
 }
 
 void MainWindow::saveFileSlot()
 {
-    QString path = QFileDialog::getSaveFileName(this, tr("Сохранить файл"), "sampleText", "*.txt *.docx *.cpp *.c *.h");
+    QString path = QFileDialog::getSaveFileName(this, "Сохранить файл", pFileManager->fileName, "*.txt  *.cpp *.c *.h");
     if(path != "")
     {
         QString text = ui->textEdit->toPlainText();
@@ -75,7 +80,7 @@ void MainWindow::saveFileSlot()
 
 void MainWindow::changeFontSizeSlot()
 {
-    pFontSetup->setFontSize(QInputDialog::getInt(this, "Размер шрифта", "Укажите размер", 14, 1, 100));
+    pFontSetup->setFontSize(QInputDialog::getInt(this, "Размер шрифта", "Укажите размер", pFontSetup->fontSize, 1, 100));
 }
 
 void MainWindow::changeFontColorSlot()
@@ -101,5 +106,11 @@ void MainWindow::changeBackgroundTextColorSlot()
 
 void MainWindow::changeHighlightSlot()
 {
-  pFontSetup->setHighlightColor(QColorDialog::getColor(pFontSetup->highlightColor,this));
+    pFontSetup->setHighlightColor(QColorDialog::getColor(pFontSetup->highlightColor,this));
+}
+
+void MainWindow::runSlot()
+{
+    ui->textEdit->setPlainText("Не работает (пока что)");
+    pCompiler->runTest(pFileManager->fileName);
 }

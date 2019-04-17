@@ -1,13 +1,14 @@
 #include "filemanager.h"
 
+
 FileManager::FileManager()
 {
-  //обычный конструктор
+    fileName = "sampleText";
 }
 
 FileManager::~FileManager()
 {
-  //обычный деструктор
+
 }
 
 QString FileManager::openFile(QString filepath)
@@ -16,6 +17,7 @@ QString FileManager::openFile(QString filepath)
     QTextStream fstream(&file);
     file.open(QIODevice::ReadOnly);
     QString text = fstream.readAll();
+    fileName = file.fileName();
     file.close();
     return text;
 }
@@ -24,14 +26,16 @@ void FileManager::createFile( QString &filepath)
 {
     QFile file(filepath);
     file.open(QIODevice::WriteOnly);
+    fileName = file.fileName();
     file.close();
 }
 
 void FileManager::saveFile(QString &filepath, QString& text)
 {
-    QFile file (filepath);
+    QFile file(filepath);
     QTextStream fstream(&file);
     file.open(QIODevice::WriteOnly);
+    fileName = file.fileName();
     fstream << text;
     file.flush();
     file.close();

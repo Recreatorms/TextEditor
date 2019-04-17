@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>TextEditor</string>
   </property>
   <property name="tabShape">
    <enum>QTabWidget::Rounded</enum>
@@ -87,10 +87,17 @@
     <property name="title">
      <string>Компилятор</string>
     </property>
+    <addaction name="run"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Подсветка синтаксиса</string>
+    </property>
    </widget>
    <addaction name="File"/>
    <addaction name="Font"/>
    <addaction name="Compiler"/>
+   <addaction name="menu"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="movable">
@@ -172,6 +179,11 @@
   <action name="changeHighlight">
    <property name="text">
     <string>Изменить цвет выделения текста</string>
+   </property>
+  </action>
+  <action name="run">
+   <property name="text">
+    <string>Собрать и запустить</string>
    </property>
   </action>
  </widget>
