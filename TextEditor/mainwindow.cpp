@@ -27,12 +27,20 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->changeBackgroundColor, &QAction::triggered, this, &MainWindow::changeBackgroundColorSlot);
   connect(ui->changeBackgroundTextColor, &QAction::triggered, this, &MainWindow::changeBackgroundTextColorSlot);
 
-  connect(ui->changeHighlight, &QAction::triggered, this, &MainWindow::changeHighlightSlot);
+  connect(ui->changeSelect, &QAction::triggered, this, &MainWindow::changeSelectSlot);
 
   connect(ui->run,&QAction::triggered, this, &MainWindow::runSlot);
+  connect(ui->highlight, &QAction::triggered, this, &MainWindow::HighlightSlot);
 
+  connect(ui->action_UTF_8, &QAction::triggered, this, &MainWindow::codecUTFSlot);
+  connect(ui->action_ANSI, &QAction::triggered, this, &MainWindow::codecANSISlot);
+  connect(ui->action_KOI8_R, &QAction::triggered, this, &MainWindow::codecKOI8Slot);
+  connect(ui->action_Macintosh, &QAction::triggered, this, &MainWindow::codecMacintoshSlot);
+  connect(ui->action_Windows_1251, &QAction::triggered, this, &MainWindow::codecWindows1251Slot);
+
+  pFontSetup->setFontStyle(defaultFontStyle);
   pFontSetup->setFontSize(defaultFontSize);
-  pFontSetup->setHighlightColor(defaultHighlightColor);
+  pFontSetup->setSelectColor(defaultSelectColor);
 }
 
 MainWindow::~MainWindow()
@@ -55,7 +63,7 @@ void MainWindow::openFileSlot()
 
 void MainWindow::createFileSlot()
 {
-  QString path = QFileDialog::getSaveFileName(this, "Создать файл", "sampleText");
+  QString path = QFileDialog::getSaveFileName(this, "Создать новый файл", "sampleText");
   pFileManager->currentPath = path;
   pFileManager->createFile(path);
 }
@@ -80,7 +88,7 @@ void MainWindow::saveFileSlot()
 
 void MainWindow::changeFontSizeSlot()
 {
-    pFontSetup->setFontSize(QInputDialog::getInt(this, "Размер шрифта", "Укажите размер", pFontSetup->fontSize, 1, 100));
+    pFontSetup->setFontSize(QInputDialog::getInt(this, "Изменить размер текста", "выф", pFontSetup->fontSize, 1, 100));
 }
 
 void MainWindow::changeFontColorSlot()
@@ -90,7 +98,7 @@ void MainWindow::changeFontColorSlot()
 
 void MainWindow::changeFontStyleSlot()
 {
-    pFontSetup->setFontStyle(QFontDialog::getFont(nullptr,this));
+    pFontSetup->setFontStyle(QFontDialog::getFont(nullptr, pFontSetup->fontStyle, this));
 }
 
 void MainWindow::changeBackgroundColorSlot()
@@ -104,13 +112,46 @@ void MainWindow::changeBackgroundTextColorSlot()
 }
 
 
-void MainWindow::changeHighlightSlot()
+void MainWindow::changeSelectSlot()
 {
-    pFontSetup->setHighlightColor(QColorDialog::getColor(pFontSetup->highlightColor,this));
+    pFontSetup->setSelectColor(QColorDialog::getColor(pFontSetup->selectColor,this));
 }
 
 void MainWindow::runSlot()
 {
     ui->textEdit->setPlainText("Не работает (пока что)");
     pCompiler->runTest(pFileManager->fileName);
+}
+
+void MainWindow::HighlightSlot()
+{
+   pFontSetup->setFontStyle(QFont("Courier New", 0, 75, false));
+   pFontSetup->setBackgroundColor(Qt::black);
+   pFontSetup->setFontColor(Qt::white);
+   ui->textEdit->setPlainText("[textedit@textedit ~]$ Не работает (пока что)\nSegmentation fault");
+}
+
+void MainWindow::codecUTFSlot()
+{
+
+}
+
+void MainWindow::codecANSISlot()
+{
+
+}
+
+void MainWindow::codecKOI8Slot()
+{
+
+}
+
+void MainWindow::codecMacintoshSlot()
+{
+
+}
+
+void MainWindow::codecWindows1251Slot()
+{
+
 }

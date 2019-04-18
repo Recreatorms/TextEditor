@@ -2,12 +2,15 @@
 
 
 
-FontSetup::FontSetup(QTextEdit*text)
+FontSetup::FontSetup(QTextEdit* text)
 {
     setup = text;
-    fontSize = defaultFontSize;
-    backgroundColor = defaultBackgroundColor;
+    fontStyle = defaultFontStyle;
+    fontSize = defaultFontSize;  
     fontColor = defaultColor;
+    backgroundColor = defaultBackgroundColor;
+    backgroundTextColor = defaultBackgroundColor;
+    selectColor = defaultSelectColor;
 }
 
 FontSetup::~FontSetup()
@@ -48,10 +51,10 @@ void FontSetup::setBackgroundTextColor(const QColor inputbackgroundTextColor)
   setup->setTextBackgroundColor(this->backgroundTextColor);
 }
 
-void FontSetup::setHighlightColor(const QColor highlightColor)
+void FontSetup::setSelectColor(const QColor selectColor)
 {
   QPalette p = setup->palette();
-  p.setColor(QPalette::Highlight, QColor(highlightColor));
+  p.setColor(QPalette::Highlight, QColor(selectColor));
   p.setColor(QPalette::HighlightedText, QColor(defaultBackgroundColor));
   setup->setPalette(p);
 }

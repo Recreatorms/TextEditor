@@ -60,7 +60,7 @@
      <height>20</height>
     </rect>
    </property>
-   <widget class="QMenu" name="Font">
+   <widget class="QMenu" name="FontMenu">
     <property name="title">
      <string>Шрифт</string>
     </property>
@@ -71,9 +71,9 @@
     <addaction name="changeBackgroundColor"/>
     <addaction name="changeBackgroundTextColor"/>
     <addaction name="separator"/>
-    <addaction name="changeHighlight"/>
+    <addaction name="changeSelect"/>
    </widget>
-   <widget class="QMenu" name="File">
+   <widget class="QMenu" name="FileMenu">
     <property name="title">
      <string>Файл</string>
     </property>
@@ -83,21 +83,26 @@
     <addaction name="saveFile"/>
     <addaction name="saveNowFile"/>
    </widget>
-   <widget class="QMenu" name="Compiler">
+   <widget class="QMenu" name="CompilerMenu">
     <property name="title">
      <string>Компилятор</string>
     </property>
     <addaction name="run"/>
    </widget>
-   <widget class="QMenu" name="menu">
+   <widget class="QMenu" name="CodecMenu">
     <property name="title">
-     <string>Подсветка синтаксиса</string>
+     <string>Кодировки</string>
     </property>
+    <addaction name="action_UTF_8"/>
+    <addaction name="action_ANSI"/>
+    <addaction name="action_KOI8_R"/>
+    <addaction name="action_Macintosh"/>
+    <addaction name="action_Windows_1251"/>
    </widget>
-   <addaction name="File"/>
-   <addaction name="Font"/>
-   <addaction name="Compiler"/>
-   <addaction name="menu"/>
+   <addaction name="FileMenu"/>
+   <addaction name="FontMenu"/>
+   <addaction name="CodecMenu"/>
+   <addaction name="CompilerMenu"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="movable">
@@ -107,7 +112,7 @@
     <set>Qt::TopToolBarArea</set>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextOnly</enum>
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
    </property>
    <property name="floatable">
     <bool>true</bool>
@@ -118,6 +123,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="highlight"/>
   </widget>
   <action name="createFile">
    <property name="text">
@@ -176,7 +182,7 @@
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="changeHighlight">
+  <action name="changeSelect">
    <property name="text">
     <string>Изменить цвет выделения текста</string>
    </property>
@@ -184,6 +190,36 @@
   <action name="run">
    <property name="text">
     <string>Собрать и запустить</string>
+   </property>
+  </action>
+  <action name="action_UTF_8">
+   <property name="text">
+    <string>Кодировка в UTF-8</string>
+   </property>
+  </action>
+  <action name="action_ANSI">
+   <property name="text">
+    <string>Кодировка в ANSI</string>
+   </property>
+  </action>
+  <action name="action_KOI8_R">
+   <property name="text">
+    <string>Кодировка в KOI8-R</string>
+   </property>
+  </action>
+  <action name="action_Macintosh">
+   <property name="text">
+    <string>Кодировка в Macintosh</string>
+   </property>
+  </action>
+  <action name="action_Windows_1251">
+   <property name="text">
+    <string>Кодировка в Windows-1251</string>
+   </property>
+  </action>
+  <action name="highlight">
+   <property name="text">
+    <string>Включить режим кулхацкера</string>
    </property>
   </action>
  </widget>

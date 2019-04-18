@@ -26,16 +26,18 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
     filemanager.cpp \
     fontsetup.cpp \
-    compiler.cpp
+    compiler.cpp \
+    codec.cpp \
+    mainwindow.cpp
 
 HEADERS += \
         mainwindow.h \
     filemanager.h \
     fontsetup.h \
-    compiler.h
+    compiler.h \
+    codec.h
 
 FORMS += \
         mainwindow.ui

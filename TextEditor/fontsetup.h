@@ -8,9 +8,10 @@
 #include <QFont>
 
 const int defaultFontSize = 20;
+const QFont defaultFontStyle("Comic Sans MS"); // kek
 const QColor defaultColor = Qt::black;
 const QColor defaultBackgroundColor = Qt::white;
-const QColor defaultHighlightColor = QColor::fromRgb(0, 120, 215, 255);
+const QColor defaultSelectColor = QColor::fromRgb(0, 120, 215, 255);
 
 class FontSetup
 {
@@ -22,14 +23,14 @@ public:
     void setFontSize(int size);
     void setBackgroundColor(const QColor backgroundColor);
     void setBackgroundTextColor(const QColor);
-    void setHighlightColor(const QColor highlightColor);
+    void setSelectColor(const QColor selectColor);
 
     QColor fontColor;
     QColor backgroundColor;
     QColor backgroundTextColor;
     QFont fontStyle;
     int fontSize;
-    QColor highlightColor;
+    QColor selectColor;
 
 private:
     QTextEdit *setup;
