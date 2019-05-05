@@ -6,6 +6,7 @@
 #include <qfiledialog.h>
 #include <QColorDialog>
 #include <QInputDialog>
+#include <QTextCodec>
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -30,17 +31,15 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->changeSelect, &QAction::triggered, this, &MainWindow::changeSelectSlot);
 
   connect(ui->run,&QAction::triggered, this, &MainWindow::runSlot);
-  connect(ui->highlight, &QAction::triggered, this, &MainWindow::HighlightSlot);
+  connect(ui->highlight, &QAction::toggled, this, &MainWindow::HighlightSlot);
 
-  connect(ui->action_UTF_8, &QAction::triggered, this, &MainWindow::codecUTFSlot);
-  connect(ui->action_ANSI, &QAction::triggered, this, &MainWindow::codecANSISlot);
+  connect(ui->action_UTF_8, &QAction::triggered, this, &MainWindow::codecUTF8Slot);
   connect(ui->action_KOI8_R, &QAction::triggered, this, &MainWindow::codecKOI8Slot);
   connect(ui->action_Macintosh, &QAction::triggered, this, &MainWindow::codecMacintoshSlot);
   connect(ui->action_Windows_1251, &QAction::triggered, this, &MainWindow::codecWindows1251Slot);
-
   pFontSetup->setFontStyle(defaultFontStyle);
   pFontSetup->setFontSize(defaultFontSize);
-  pFontSetup->setSelectColor(defaultSelectColor);
+  pFontSetup->setSelectColor(defaultSelectColor, defaultBackgroundColor);
 }
 
 MainWindow::~MainWindow()
@@ -48,6 +47,7 @@ MainWindow::~MainWindow()
   delete ui;
   delete pFileManager;
   delete pFontSetup;
+  delete pCompiler;
 }
 
 void MainWindow::openFileSlot()
@@ -114,7 +114,7 @@ void MainWindow::changeBackgroundTextColorSlot()
 
 void MainWindow::changeSelectSlot()
 {
-    pFontSetup->setSelectColor(QColorDialog::getColor(pFontSetup->selectColor,this));
+    pFontSetup->setSelectColor(QColorDialog::getColor(pFontSetup->selectColor,this), defaultBackgroundColor);
 }
 
 void MainWindow::runSlot()
@@ -125,33 +125,66 @@ void MainWindow::runSlot()
 
 void MainWindow::HighlightSlot()
 {
-   pFontSetup->setFontStyle(QFont("Courier New", 0, 75, false));
-   pFontSetup->setBackgroundColor(Qt::black);
-   pFontSetup->setFontColor(Qt::white);
-   ui->textEdit->setPlainText("[textedit@textedit ~]$ Не работает (пока что)\nSegmentation fault");
+  if (ui->highlight->isChecked() == true){
+     pHighlighter = new Highlighter(pFontSetup->setup->document());
+     pFontSetup->setFontStyle(QFont("Courier New", 15, 75, false));
+     pFontSetup->setFontSize(25);
+     pFontSetup->setBackgroundColor(Qt::black);
+     pFontSetup->setFontColor(Qt::white);
+     pFontSetup->setSelectColor(Qt::white, Qt::black);
+
+  } else {
+      pFontSetup->setFontColor(Qt::black);
+      delete pHighlighter;
+      pFontSetup->setFontColor(Qt::black);
+      pFontSetup->setFontStyle(QFont("Comic Sans MS", 0, 75, false));
+      pFontSetup->setBackgroundColor(Qt::white);
+
+      pFontSetup->setSelectColor(defaultSelectColor, Qt::white);
+  }
 }
 
-void MainWindow::codecUTFSlot()
+void MainWindow::codecUTF8Slot()
 {
-
-}
-
-void MainWindow::codecANSISlot()
-{
-
+  QString text = ui->textEdit->toPlainText();
+  QByteArray byteArray;
+  QDataStream in(&byteArray, QIODevice::WriteOnly);
+  in << text;
+  QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+  text = codec->toUnicode(byteArray);
+  ui->textEdit->setPlainText(text);
 }
 
 void MainWindow::codecKOI8Slot()
 {
-
+  QString text = ui->textEdit->toPlainText();
+  QByteArray byteArray;
+  QDataStream in(&byteArray, QIODevice::WriteOnly);
+  in << text;
+  QTextCodec *codec = QTextCodec::codecForName("KOI8-R");
+  text = codec->toUnicode(byteArray);
+  ui->textEdit->setPlainText(text);
 }
 
 void MainWindow::codecMacintoshSlot()
 {
-
+  QString text = ui->textEdit->toPlainText();
+  QByteArray byteArray;
+  QDataStream in(&byteArray, QIODevice::WriteOnly);
+  in << text;
+  QTextCodec *codec = QTextCodec::codecForName("Macintosh");
+  text = codec->toUnicode(byteArray);
+  ui->textEdit->setPlainText(text);
 }
 
 void MainWindow::codecWindows1251Slot()
 {
-
+  QString text = ui->textEdit->toPlainText();
+  QByteArray byteArray;
+  QDataStream in(&byteArray, QIODevice::WriteOnly);
+  in << text;
+  QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
+  text = codec->toUnicode(byteArray);
+  ui->textEdit->setPlainText(text);
 }
+

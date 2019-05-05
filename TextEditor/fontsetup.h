@@ -23,7 +23,7 @@ public:
     void setFontSize(int size);
     void setBackgroundColor(const QColor backgroundColor);
     void setBackgroundTextColor(const QColor);
-    void setSelectColor(const QColor selectColor);
+    void setSelectColor(const QColor selectColor, const QColor selectTextColor);
 
     QColor fontColor;
     QColor backgroundColor;
@@ -32,7 +32,6 @@ public:
     int fontSize;
     QColor selectColor;
 
-private:
     QTextEdit *setup;
 };
 

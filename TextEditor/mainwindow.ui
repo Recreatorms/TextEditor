@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>TextEditor</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>R:/Games (R)/Картинки/avatar/XDl0MFn9_400x400.jpg</normaloff>R:/Games (R)/Картинки/avatar/XDl0MFn9_400x400.jpg</iconset>
+  </property>
   <property name="tabShape">
    <enum>QTabWidget::Rounded</enum>
   </property>
@@ -94,7 +98,6 @@
      <string>Кодировки</string>
     </property>
     <addaction name="action_UTF_8"/>
-    <addaction name="action_ANSI"/>
     <addaction name="action_KOI8_R"/>
     <addaction name="action_Macintosh"/>
     <addaction name="action_Windows_1251"/>
@@ -218,8 +221,19 @@
    </property>
   </action>
   <action name="highlight">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Включить режим кулхацкера</string>
+   </property>
+  </action>
+  <action name="action_Unicode">
+   <property name="text">
+    <string>Кодировка в Unicode</string>
    </property>
   </action>
  </widget>

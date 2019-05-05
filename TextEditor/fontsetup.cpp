@@ -51,10 +51,10 @@ void FontSetup::setBackgroundTextColor(const QColor inputbackgroundTextColor)
   setup->setTextBackgroundColor(this->backgroundTextColor);
 }
 
-void FontSetup::setSelectColor(const QColor selectColor)
+void FontSetup::setSelectColor(const QColor selectColor, const QColor selectTextColor)
 {
   QPalette p = setup->palette();
   p.setColor(QPalette::Highlight, QColor(selectColor));
-  p.setColor(QPalette::HighlightedText, QColor(defaultBackgroundColor));
+  p.setColor(QPalette::HighlightedText, QColor(selectTextColor));
   setup->setPalette(p);
 }

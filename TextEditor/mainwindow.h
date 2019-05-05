@@ -6,7 +6,7 @@
 #include "filemanager.h"
 #include "fontsetup.h"
 #include "compiler.h"
-#include "codec.h"
+#include "syntaxhighlighter.h"
 
 namespace Ui {
   class MainWindow;
@@ -38,8 +38,7 @@ private slots:
 
   void HighlightSlot();
 
-  void codecUTFSlot();
-  void codecANSISlot();
+  void codecUTF8Slot();
   void codecKOI8Slot();
   void codecMacintoshSlot();
   void codecWindows1251Slot();
@@ -49,7 +48,7 @@ private:
   FileManager* pFileManager;
   FontSetup* pFontSetup;
   Compiler* pCompiler;
-  Codec* pCodec;
+  Highlighter* pHighlighter;
 };
 
 #endif // MAINWINDOW_H

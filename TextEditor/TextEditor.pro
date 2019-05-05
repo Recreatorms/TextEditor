@@ -29,15 +29,15 @@ SOURCES += \
     filemanager.cpp \
     fontsetup.cpp \
     compiler.cpp \
-    codec.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    syntaxhighlighter.cpp
 
 HEADERS += \
         mainwindow.h \
     filemanager.h \
     fontsetup.h \
     compiler.h \
-    codec.h
+    syntaxhighlighter.h
 
 FORMS += \
         mainwindow.ui
