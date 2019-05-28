@@ -8,7 +8,7 @@ Highlighter::Highlighter(QTextDocument *parent)
     SyntaxHighlightingRule rule;
 
     normalTextFormat.setForeground(Qt::white);
-    rule.pattern = QRegExp("\\b[A-Za-z]+\\b");
+    rule.pattern = QRegExp(".");
     rule.format = normalTextFormat;
     highlightingRules.append(rule);
 
@@ -31,17 +31,20 @@ Highlighter::Highlighter(QTextDocument *parent)
         highlightingRules.append(rule);
     }
 
-
+    numbersFormat.setForeground(Qt::darkMagenta);
+    rule.pattern = QRegExp("\\b[0-9]+\\b");
+    rule.format = numbersFormat;
+    highlightingRules.append(rule);
 
     classFormat.setFontWeight(QFont::Bold);
     classFormat.setForeground(Qt::darkCyan);
-    rule.pattern = QRegExp("\\bclass+ [A-Za-z]+\\b");
+    rule.pattern = QRegExp("\\bclass+ [A-Za-z]+\\b|\\bstruct+ [A-Za-z]+\\b");
     rule.format = classFormat;
     highlightingRules.append(rule);
 
     ifFormat.setFontWeight(QFont::Bold);
     ifFormat.setForeground(Qt::blue);
-    rule.pattern = QRegExp("\\bif\\b|\\belse\\b|\\bfor\\b|\\bwhile\\b|\\bdo\\b|\\bswitch\\b|\\bcase\\b");
+    rule.pattern = QRegExp("\\bif\\b|\\belse\\b|\\bfor\\b|\\bwhile\\b|\\bdo\\b|\\bswitch\\b|\\bcase\\b|\\breturn\\b");
     rule.format = ifFormat;
     highlightingRules.append(rule);
 
@@ -57,10 +60,7 @@ Highlighter::Highlighter(QTextDocument *parent)
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
-    numbersFormat.setForeground(Qt::darkMagenta);
-    rule.pattern = QRegExp("\\b[0-9]+\\b");
-    rule.format = numbersFormat;
-    highlightingRules.append(rule);
+
 
     functionFormat.setFontItalic(true);
     functionFormat.setForeground(Qt::gray);

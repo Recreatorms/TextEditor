@@ -40,8 +40,8 @@ private slots:
 
   void codecUTF8Slot();
   void codecKOI8Slot();
-  void codecMacintoshSlot();
   void codecWindows1251Slot();
+
 
 private:
   Ui::MainWindow *ui;

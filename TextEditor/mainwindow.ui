@@ -99,7 +99,6 @@
     </property>
     <addaction name="action_UTF_8"/>
     <addaction name="action_KOI8_R"/>
-    <addaction name="action_Macintosh"/>
     <addaction name="action_Windows_1251"/>
    </widget>
    <addaction name="FileMenu"/>
@@ -234,6 +233,11 @@
   <action name="action_Unicode">
    <property name="text">
     <string>Кодировка в Unicode</string>
+   </property>
+  </action>
+  <action name="action_fromUTF_8">
+   <property name="text">
+    <string>Кодировать в Юникод из UTF-8</string>
    </property>
   </action>
  </widget>

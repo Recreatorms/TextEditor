@@ -35,7 +35,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
   connect(ui->action_UTF_8, &QAction::triggered, this, &MainWindow::codecUTF8Slot);
   connect(ui->action_KOI8_R, &QAction::triggered, this, &MainWindow::codecKOI8Slot);
-  connect(ui->action_Macintosh, &QAction::triggered, this, &MainWindow::codecMacintoshSlot);
   connect(ui->action_Windows_1251, &QAction::triggered, this, &MainWindow::codecWindows1251Slot);
   pFontSetup->setFontStyle(defaultFontStyle);
   pFontSetup->setFontSize(defaultFontSize);
@@ -88,7 +87,7 @@ void MainWindow::saveFileSlot()
 
 void MainWindow::changeFontSizeSlot()
 {
-    pFontSetup->setFontSize(QInputDialog::getInt(this, "Изменить размер текста", "выф", pFontSetup->fontSize, 1, 100));
+    pFontSetup->setFontSize(QInputDialog::getInt(this, "Изменить размер текста","Давай меняй, чего ждёшь", pFontSetup->fontSize, 1, 100));
 }
 
 void MainWindow::changeFontColorSlot()
@@ -119,7 +118,7 @@ void MainWindow::changeSelectSlot()
 
 void MainWindow::runSlot()
 {
-    ui->textEdit->setPlainText("Не работает (пока что)");
+    ui->textEdit->setPlainText("Не работает (пока что). и не будет. я не знаю, не умею, нехочу не будуотстаньте");
     pCompiler->runTest(pFileManager->fileName);
 }
 
@@ -128,63 +127,60 @@ void MainWindow::HighlightSlot()
   if (ui->highlight->isChecked() == true){
      pHighlighter = new Highlighter(pFontSetup->setup->document());
      pFontSetup->setFontStyle(QFont("Courier New", 15, 75, false));
-     pFontSetup->setFontSize(25);
+     pFontSetup->setFontSize(20);
      pFontSetup->setBackgroundColor(Qt::black);
      pFontSetup->setFontColor(Qt::white);
      pFontSetup->setSelectColor(Qt::white, Qt::black);
 
   } else {
-      pFontSetup->setFontColor(Qt::black);
       delete pHighlighter;
       pFontSetup->setFontColor(Qt::black);
       pFontSetup->setFontStyle(QFont("Comic Sans MS", 0, 75, false));
       pFontSetup->setBackgroundColor(Qt::white);
-
+      pFontSetup->setFontSize(defaultFontSize);
       pFontSetup->setSelectColor(defaultSelectColor, Qt::white);
   }
 }
 
 void MainWindow::codecUTF8Slot()
-{
+{/*
   QString text = ui->textEdit->toPlainText();
   QByteArray byteArray;
-  QDataStream in(&byteArray, QIODevice::WriteOnly);
-  in << text;
+  QDataStream out(&byteArray, QIODevice::WriteOnly);
+  out << text;
   QTextCodec *codec = QTextCodec::codecForName("UTF-8");
   text = codec->toUnicode(byteArray);
+  ui->textEdit->setPlainText(text);*/
+  QString text = ui->textEdit->toPlainText();
+  QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+  QByteArray byteArray;
+  QDataStream in(&byteArray, QIODevice::ReadOnly);
+  in >> byteArray;
+  byteArray = codec->fromUnicode(text);
+  text = byteArray;
   ui->textEdit->setPlainText(text);
 }
 
 void MainWindow::codecKOI8Slot()
 {
   QString text = ui->textEdit->toPlainText();
-  QByteArray byteArray;
-  QDataStream in(&byteArray, QIODevice::WriteOnly);
-  in << text;
   QTextCodec *codec = QTextCodec::codecForName("KOI8-R");
-  text = codec->toUnicode(byteArray);
-  ui->textEdit->setPlainText(text);
-}
-
-void MainWindow::codecMacintoshSlot()
-{
-  QString text = ui->textEdit->toPlainText();
   QByteArray byteArray;
-  QDataStream in(&byteArray, QIODevice::WriteOnly);
-  in << text;
-  QTextCodec *codec = QTextCodec::codecForName("Macintosh");
-  text = codec->toUnicode(byteArray);
+  QDataStream in(&byteArray, QIODevice::ReadOnly);
+  in >> byteArray;
+  byteArray = codec->fromUnicode(text);
+  text = byteArray;
   ui->textEdit->setPlainText(text);
 }
 
 void MainWindow::codecWindows1251Slot()
 {
   QString text = ui->textEdit->toPlainText();
-  QByteArray byteArray;
-  QDataStream in(&byteArray, QIODevice::WriteOnly);
-  in << text;
   QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
-  text = codec->toUnicode(byteArray);
+  QByteArray byteArray;
+  QDataStream in(&byteArray, QIODevice::ReadOnly);
+  in >> byteArray;
+  byteArray = codec->fromUnicode(text);
+  text = byteArray;
   ui->textEdit->setPlainText(text);
 }
-

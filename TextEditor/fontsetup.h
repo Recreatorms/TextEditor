@@ -7,7 +7,7 @@
 #include <QFontDialog>
 #include <QFont>
 
-const int defaultFontSize = 20;
+const int defaultFontSize = 10;
 const QFont defaultFontStyle("Comic Sans MS"); // kek
 const QColor defaultColor = Qt::black;
 const QColor defaultBackgroundColor = Qt::white;
